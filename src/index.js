@@ -33,6 +33,17 @@ function displayData(){
             movieShowtime.innerHTML=""
             movieShowtime.textContent="Showtime: "+movie.showtime//asssign  content from json
 
+
+            //contain Available tickets
+            const ticketInformation=document.createElement('h3')
+            ticketInformation.innerHTML=""
+            ticketInformation.textContent="Tickets Available: "
+
+
+            const movieAvailableTickets=document.createElement('em')
+            movieAvailableTickets.innerHTML=""
+            movieAvailableTickets.textContent=(movie.capacity-movie.tickets_sold) //asssign  content from json
+
             //contain Description
             const movieDescription=document.createElement('h4')
             movieDescription.innerHTML=""
@@ -42,7 +53,29 @@ function displayData(){
             //create an add cart button
             const addCartBtn = document.createElement('button')
             addCartBtn.id='addcartbtn'
-            addCartBtn.textContent="Add to Cart"
+            addCartBtn.textContent="Buy Ticket"
+
+
+            //add event listener to the button that when buy ticket is clicked
+            //the available reduce and that i wont be able to buy ticket if its 0
+            addCartBtn.addEventListener("click",buyTicketFunc)
+
+            //function to be called
+            function buyTicketFunc(){
+                
+                if (movieAvailableTickets.textContent>=1){
+                    movieAvailableTickets.textContent--   
+                    //CHANGE THE BUTTON TO SOLD OUT WHEN 0 TICKETS AVAILABLE
+                    if (movieAvailableTickets.textContent==0) {
+                        addCartBtn.textContent="SOLD OUT"
+                    }             
+                }
+                else{
+                    
+                    alert('Tickets Not Available')//Give an alert when tickets not available
+                }
+                
+            }
 
 
           //Appending all created tags
@@ -52,19 +85,14 @@ function displayData(){
             divMovieContainer.appendChild(movieLength)
             divMovieContainer.appendChild(movieCapacity)
             divMovieContainer.appendChild(movieShowtime)
+            ticketInformation.appendChild(movieAvailableTickets)
+            divMovieContainer.appendChild(ticketInformation)
+            
             divMovieContainer.appendChild(movieDescription)
             divMovieContainer.appendChild(addCartBtn)
 
 
-            //add item to cart event listener on button
-            //addCartBtn.addEventListener('click', addcart)
             
-            //function addcart(){
-              //  let itemsoncart=document.getElementById('count-items').textContent
-                
-               // itemsoncart.textContent=itemsoncart++
-                //console.log(itemsoncart)
-            //}
             
 
         });//movies.foreach ends here
@@ -96,15 +124,4 @@ displayData()
 
 
 
-// //create h3 tag
-            // const h3=document.createElement('h3')
-            // h3.innerHTML=""
-            // //create em tag
-            // const em= document.createElement('em')
-            // em.innerHTML=""
-            // //now assign em content
-            // em.textContent="Capacity :"+movie.capacity
-            // //now lets append em into h2
-            // h3.appendChild(em)
-            
-            // divMovieContainer.appendChild(h3)
+

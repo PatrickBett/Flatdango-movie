@@ -21,7 +21,7 @@ h4{
 #movie-container{
     margin: 50px;
     background-color: white;
-    width: 250px;
+    width: 280px;
     height: 700px;
     border-radius: 10px;
 }
@@ -49,6 +49,12 @@ h4{
     color: orangered;
     text-align: center;
     margin-top: 20px;
+}
+#movie-container em {
+    color: orangered;
+    text-align: center;
+    margin-top: 20px;
+    text-align: center;
 }
 #input-search{
     width: 190px;
